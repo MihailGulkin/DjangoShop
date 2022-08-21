@@ -3,7 +3,6 @@ a
     text-decoration: none;
     color: black;
 }
-
 .base_header
 {
     position: fixed;
@@ -65,3 +64,59 @@ a
     height: 40px;
 }
 
+/* FOOTER BACKGROUND*/
+.footer_background
+{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("../image/pw_maze_black_2X.png");
+    height: 250px;
+}
+
+.footer_rights
+{
+    margin: 10px auto 40px;
+    width: 76px;
+}
+/*.footer_rights > img*/
+
+.footer_dragon_svg
+{
+    height: 100px;
+    cursor: pointer ;
+    width: 100px;
+}
+.footer_dragon_svg:hover path
+{
+    fill: mediumspringgreen;
+    transition: .5s;
+}
+.footer_dragon_svg > path
+{
+    fill: white;
+}
+.footer_designed_text > a
+{
+    color: #7cc576;
+    font-weight: 600;
+}
+.footer_designed_text > a:hover
+{
+    color: white;
+}
+.footer_designed_text
+{
+    text-align: center;
+    margin-top: 5px;
+}
+.footer_text
+{
+    color: #cccccc;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    text-align: center;
+}

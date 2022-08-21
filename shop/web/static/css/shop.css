@@ -1,4 +1,4 @@
-.some
+.test_div
 {
-    margin-top: 200px;
+    min-height: calc(100vh - 80px);
 }
