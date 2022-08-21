@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    {% block style %}
+    {% endblock style %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/django.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<header class="base_header">
+    <nav class="nav_bar">
+        <ul class="ul_container">
+            <li class="li_container"><a href="{% url 'main_page' %}"
+                                        class="a_container">ГЛАВНАЯ</a>
+            </li>
+            <li class="li_container"><a href="#"
+                                        class="a_container_img"><img
+                    src="{% static 'image/small-logo-white.svg' %}"
+                    alt></a></li>
+            <li class="li_container"><a href="{% url 'shop_page' %}"
+                                        class="a_container">МАГАЗИН</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+{% block content %}
+{% endblock content %}
+</body>
+</html>
