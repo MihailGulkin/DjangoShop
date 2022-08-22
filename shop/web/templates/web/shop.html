@@ -4,7 +4,73 @@
     <link rel="stylesheet" href="{% static 'css/shop.css' %}">
 {% endblock style %}
 {% block content %}
-    <div class="test_div">
+    <section class="shop">
+        <header class="shop_header">
+            <div class="shop_header_container">
+                <h2>МАГАЗИН</h2>
+                <h6>У нас большой асортимент товаров</h6>
+            </div>
+        </header>
+        <section class="shop_nav_bar_section">
+            <ul class="shop_nav_bar">
+                <li class="shop_li">
+                    <a data-filter-title="all" class="shop_not_active shop_activate">ВСЁ</a>
+                </li>
+                <li class="shop_li">
+                    <a data-filter-title="mobile" class="shop_not_active">СМАРТФОНЫ</a>
+                </li>
+                <li class="shop_li">
+                    <a data-filter-title="notebook" class="shop_not_active">НОУТБУКИ</a>
+                </li>
+                <li class="shop_li">
+                    <a data-filter-title="pc" class="shop_not_active">КОМПЬЮТЕРЫ</a>
+                </li>
+                <li class="shop_li">
+                    <a data-filter-title="accessories" class="shop_not_active">АКСЕССУАРЫ</a>
+                </li>
+            </ul>
+        </section>
+        <section class="shop_list_products_section">
 
-    </div>
+            <div class="shop_container_products">
+                {% for product in products %}
+                    {% if product.availability %}
+                        {% if product.group == "mobile" %}
+                            <div class="mobile shop_product_container">
+                                <img src="{{ product.img.url }}" alt="">
+                                <h3>{{ product.name }}</h3>
+                                <p>Цена: {{ product.price }} ₽</p>
+                            </div>
+                        {% elif product.group == "pc" %}
+                            <div class="pc shop_product_container">
+                                <!-- Компьютеры -->
+                                <img src="{{ product.img.url }}" alt="">
+                                <h3>{{ product.name }}</h3>
+                                <p>Цена: {{ product.price }} ₽</p>
+                            </div>
+                        {% elif product.group == "notebook" %}
+                            <div class="notebook shop_product_container">
+                                <!-- Ноутбуки -->
+                                <img src="{{ product.img.url }}" alt="">
+                                <h3>{{ product.name }}</h3>
+                                <p>Цена: {{ product.price }} ₽</p>
+                            </div>
+                        {% else %}
+                            <div class="accessories shop_product_container">
+                                <!-- Аксессуары -->
+                                <img src="{{ product.img.url }}" alt="">
+                                <h3>{{ product.name }}</h3>
+                                <p>Цена: {{ product.price }} ₽</p>
+                            </div>
+                        {% endif %}
+
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+
+        </section>
+    </section>
+    <script src="{% static 'js/filter_product.js' %}"></script>
+    <script src="{% static 'js/button_swapper.js' %}"></script>
 {% endblock content %}

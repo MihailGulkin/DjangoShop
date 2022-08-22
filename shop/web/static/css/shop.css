@@ -1,4 +1,193 @@
-.test_div
+.shop
 {
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 250px);
+    margin-top: 300px;
+}
+
+.shop_header_container > h2
+{
+    font-size: 34px;
+    color: #222222;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin: 0 0 15px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.shop_header_container > h6
+{
+    font-size: 16px;
+    color: #888888;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 60px 0;
+}
+
+.shop_nav_bar_section
+{
+    display: flex;
+    justify-content: center;
+}
+
+.shop_nav_bar
+{
+    display: flex;
+    justify-content: space-around;
+    width: 600px;
+}
+
+.shop_activate
+{
+    background: #7cc576 !important;
+    color: #fff !important;
+}
+
+.shop_li > a
+{
+
+    margin-right: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #222222;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    background: #f7f7f7;
+
+}
+
+.shop_li > a:hover
+{
+    background: #7cc576;
+    color: #fff;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.post_active
+{
+    animation-duration: .5s;
+    animation-name: post_active_animation;
+}
+
+@keyframes post_active_animation
+{
+    0%
+    {
+        background-color: #7cc576;
+        color: #fff;
+    }
+    100%
+    {
+        color: #222222;
+        background: #f7f7f7;
+    }
+}
+
+/* PRODUCT SECTION*/
+.shop_list_products_section
+{
+    height: 100%;
+    width: 100%;
+}
+
+.shop_container_products
+{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-right: 200px;
+    margin-left: 200px;
+}
+
+.shop_product_container
+{
+    width: 300px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.shop_product_container > img
+{
+    width: 350px;
+    height: 250px;
+}
+
+.shop_product_container > h3
+{
+    font-family: 'Montserrat', sans-serif;
+    color: #222222;
+    font-size: 16px;
+    margin-top: 25px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.shop_product_container > p
+{
+    font-family: 'Open Sans', sans-serif;
+    color: #888888;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.hide
+{
+    animation-duration: .5s;
+    animation-name: myAnimation;
+    animation-fill-mode: forwards;
+}
+
+.delete_obj
+{
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+@keyframes anime_hide
+{
+    100%
+    {
+        opacity: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+}
+
+@keyframes myAnimation
+{
+    0%
+    {
+        opacity: 1;
+        transform: rotateX(90deg);
+    }
+    50%
+    {
+        opacity: 0.5;
+        transform: rotateX(0deg);
+    }
+    100%
+    {
+        opacity: 0;
+        transform: rotateX(90deg);
+    }
 }

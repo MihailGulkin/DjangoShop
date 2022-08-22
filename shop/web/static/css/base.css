@@ -80,8 +80,9 @@ a
 {
     margin: 10px auto 40px;
     width: 76px;
+    display: flex;
+    justify-content: center;
 }
-/*.footer_rights > img*/
 
 .footer_dragon_svg
 {
@@ -94,6 +95,7 @@ a
     fill: mediumspringgreen;
     transition: .5s;
 }
+
 .footer_dragon_svg > path
 {
     fill: white;

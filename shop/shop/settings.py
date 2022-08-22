@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-to@)kztdv6$sao2b(utefm0yyo3v0@8t14vt%r8j*o!7l5qrfs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# AUTH_USER_MODEL = 'users.CustomUser'
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -36,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web'
+    'web',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -118,3 +121,4 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
