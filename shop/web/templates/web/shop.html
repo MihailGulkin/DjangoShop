@@ -14,7 +14,8 @@
         <section class="shop_nav_bar_section">
             <ul class="shop_nav_bar">
                 <li class="shop_li">
-                    <a data-filter-title="all" class="shop_not_active shop_activate">ВСЁ</a>
+                    <a data-filter-title="all"
+                       class="shop_not_active shop_activate">ВСЁ</a>
                 </li>
                 <li class="shop_li">
                     <a data-filter-title="mobile" class="shop_not_active">СМАРТФОНЫ</a>
@@ -36,6 +37,7 @@
                 {% for product in products %}
                     {% if product.availability %}
                         {% if product.group == "mobile" %}
+                            <!-- Телефон -->
                             <div class="mobile shop_product_container">
                                 <img src="{{ product.img.url }}" alt="">
                                 <h3>{{ product.name }}</h3>

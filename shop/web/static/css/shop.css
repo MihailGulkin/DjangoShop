@@ -72,7 +72,7 @@
 
 .post_active
 {
-    animation-duration: .5s;
+    animation-duration: .7s;
     animation-name: post_active_animation;
 }
 
@@ -110,14 +110,14 @@
 
 .shop_product_container
 {
-    width: 300px;
+    width: 350px;
     height: 400px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .shop_product_container > img
@@ -147,13 +147,14 @@
 
 .hide
 {
-    animation-duration: .5s;
+    animation-duration: .7s;
     animation-name: myAnimation;
     animation-fill-mode: forwards;
 }
 
 .delete_obj
 {
+    display: none;
     height: 0;
     width: 0;
     padding: 0;
@@ -187,6 +188,7 @@
     }
     100%
     {
+
         opacity: 0;
         transform: rotateX(90deg);
     }
