@@ -17,16 +17,12 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=32, help_text='First name',
                                   null=True,
                                   validators=[RegexValidator(
-                                      regex=r'^[\dA-Za-zА-Яа-я]+_'
-                                            r'?[\dA-Za-zА-Яа-я]+$'
-                                  )],
+                                      regex=r'^[A-Za-zА-Яа-я]+')],
                                   )
     last_name = models.CharField(max_length=32, help_text='Last name',
                                  null=True,
                                  validators=[RegexValidator(
-                                     regex=r'^[\dA-Za-zА-Яа-я]+_'
-                                           r'?[\dA-Za-zА-Яа-я]+$'
-                                 )],
+                                     regex=r'^[\dA-Za-zА-Яа-я]+_')],
                                  )
     email = models.EmailField(max_length=64,
                               help_text='Enter a valid email address',

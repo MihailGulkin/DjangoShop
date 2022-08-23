@@ -1,0 +1,5 @@
+.login_section
+{
+    min-height: calc(100vh - 350px);
+    margin-top: 100px;
+}
