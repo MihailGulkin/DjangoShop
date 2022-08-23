@@ -10,10 +10,18 @@
 {% block content %}
     <section class="login_section">
         <div class="login_container">
-            <form method="post">
+            <div class="login_name_container">
+                <h2>РЕГИСТРАЦИЯ</h2>
+            </div>
+            <form class="login_post_form" method="post">
                 {% csrf_token %}
-                {{ user_form.0.help_text }}
-                <button type="submit">РЕГИСТРАЦИЯ</button>
+                {{ profile_form.first_name|append_attr:"autofocus"}}
+                {{ profile_form.last_name }}
+                {{ profile_form.email }}
+                {{ user_form.username|remove_attr:"autofocus" }}
+                {{ user_form.password1 }}
+                {{ user_form.password2 }}
+                <button class="login_btn" type="submit">РЕГИСТРАЦИЯ</button>
             </form>
         </div>
     </section>
