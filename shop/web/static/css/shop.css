@@ -1,7 +1,8 @@
 .shop
 {
     min-height: calc(100vh - 250px);
-    margin-top: 300px;
+    margin: 300px auto;
+    max-width: 1600px;
 }
 
 .shop_header_container > h2
@@ -101,7 +102,7 @@
 {
     margin-top: 30px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: wrap;
     flex-direction: row;
     margin-right: 200px;

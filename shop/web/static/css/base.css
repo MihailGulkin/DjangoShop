@@ -67,7 +67,7 @@ a
 /* FOOTER BACKGROUND*/
 .footer_background
 {
-    margin-top: 100px;
+    /*margin-top: 100px;*/
     display: flex;
     justify-content: center;
     flex-direction: column;

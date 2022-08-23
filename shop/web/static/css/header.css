@@ -559,7 +559,10 @@
 }
 
 /* BUSINESS SECTION */
-
+.main_business
+{
+    margin-bottom: 100px;
+}
 .main_business_background
 {
     background: url("../image/section-bg2.jpg") no-repeat top center;

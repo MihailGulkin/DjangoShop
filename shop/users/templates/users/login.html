@@ -1,0 +1,20 @@
+{% extends 'web/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}
+    <title>Login</title>
+{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock style %}
+{% block content %}
+    <section class="login_section">
+        <div class="login_container">
+            <form method="post">
+                {% csrf_token %}
+                {{ user_form.0.help_text }}
+                <button type="submit">РЕГИСТРАЦИЯ</button>
+            </form>
+        </div>
+    </section>
+{% endblock content %}
