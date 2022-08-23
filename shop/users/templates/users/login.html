@@ -15,12 +15,14 @@
             </div>
             <form class="login_post_form" method="post">
                 {% csrf_token %}
-                {{ profile_form.first_name|append_attr:"autofocus"}}
-                {{ profile_form.last_name }}
-                {{ profile_form.email }}
-                {{ user_form.username|remove_attr:"autofocus" }}
-                {{ user_form.password1 }}
-                {{ user_form.password2 }}
+                <div class="login_container_fields">
+                    {{ profile_form.first_name|add_class:'login_form_fields'|append_attr:'placeholder:Имя' }}
+                    {{ profile_form.last_name|add_class:'login_form_fields'| append_attr:'placeholder:Фамилия'}}
+                    {{ profile_form.email|add_class:'login_form_fields'| append_attr:'placeholder:E-mail' }}
+                    {{ user_form.username|remove_attr:"autofocus"|add_class:'login_form_fields'| append_attr:'placeholder:Логин' }}
+                    {{ user_form.password1|add_class:'login_form_fields'|append_attr:'placeholder:Пароль'}}
+                    {{ user_form.password2|add_class:'login_form_fields'|append_attr:'placeholder:Подтвердите пароль'}}
+                </div>
                 <button class="login_btn" type="submit">РЕГИСТРАЦИЯ</button>
             </form>
         </div>
