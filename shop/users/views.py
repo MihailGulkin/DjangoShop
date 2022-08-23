@@ -3,12 +3,16 @@ import logging
 from django.shortcuts import render, redirect
 from django.shortcuts import HttpResponse
 from django.views import View
-from .forms import ProfileForm, CreateUserForm
+from .forms import ProfileForm, CreateUserForm, LoginForm
 
 
-class LoginPageView(View):
+class RegisterPageView(View):
+    template_name = 'users/register.html'
+
     def get(self, request):
-        return render(request, 'users/login.html',
+        # if request.user.is_authenticated:
+        #     return redirect('main_page')
+        return render(request, self.template_name,
                       {'profile_form': ProfileForm,
                        'user_form': CreateUserForm})
 
@@ -21,12 +25,14 @@ class LoginPageView(View):
                 stud.user = user_form.save()
                 stud.save()
                 return redirect('main_page')
-            else:
-                logging.getLogger(__name__).error('Ошибка')
+        return render(request, self.template_name,
+                      {'profile_form': profile_form,
+                       'user_form': user_form})
 
-        else:
-            logging.getLogger(__name__).error(type(user_form))
 
-        return render(request, 'users/login.html',
-                          {'profile_form': profile_form,
-                           'user_form': user_form})
+class LoginPageView(View):
+    template = 'users/login.html'
+
+    def get(self, request):
+        return render(request, self.template,
+                      {'login_form': LoginForm})

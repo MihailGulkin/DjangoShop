@@ -2,32 +2,14 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block title %}
-    <title>Login</title>
+    <title>Login Page</title>
 {% endblock title %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock style %}
 {% block content %}
     <section class="login_section">
-        <div class="login_container">
-            <div class="login_name_container">
-                <h2>РЕГИСТРАЦИЯ</h2>
-            </div>
-            <form class="login_post_form" method="post">
-                {% csrf_token %}
-                <div class="login_container_fields">
-{#                    {{ user_form.as_div }}#}
-{#                    {{ profile_form.as_div }}#}
-                    {{ profile_form.first_name|add_class:'login_form_fields'|append_attr:'placeholder:Имя' }}
-                    {{ user_form.errors}}
-                    {{ profile_form.last_name|add_class:'login_form_fields'| append_attr:'placeholder:Фамилия' }}
-                    {{ profile_form.email|add_class:'login_form_fields'| append_attr:'placeholder:E-mail' }}
-                    {{ user_form.username|remove_attr:"autofocus"|add_class:'login_form_fields'| append_attr:'placeholder:Логин' }}
-                    {{ user_form.password1|add_class:'login_form_fields'|append_attr:'placeholder:Пароль' }}
-                    {{ user_form.password2|add_class:'login_form_fields'|append_attr:'placeholder:Подтвердите пароль' }}
-                </div>
-                <button class="login_btn" type="submit">РЕГИСТРАЦИЯ</button>
-            </form>
-        </div>
+
     </section>
+    {{ login_form.as_p }}
 {% endblock content %}
