@@ -5,7 +5,8 @@ from .service.users.services import validate_size_image
 
 
 class Profile(models.Model):
-    img = models.ImageField(default='no_image.jpg', upload_to='product_image',
+    img = models.ImageField(default='no_image_django_shop_py.jpg',
+                            upload_to='users_avatar',
                             blank=True,
                             validators=[
                                 FileExtensionValidator(
@@ -13,7 +14,7 @@ class Profile(models.Model):
                                                         'png']),
                                 validate_size_image,
                             ],
-                            null=True, )
+                            )
     first_name = models.CharField(max_length=32, help_text='First name',
                                   null=True,
                                   validators=[RegexValidator(

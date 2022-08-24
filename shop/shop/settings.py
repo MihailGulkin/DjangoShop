@@ -117,7 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'web/static/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'shop/static/media')
 MEDIA_URL = 'media/'
 LOGOUT_REDIRECT_URL = 'main_page'
 # Default primary key field type

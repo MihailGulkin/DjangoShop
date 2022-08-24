@@ -4,6 +4,8 @@ from .models import Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.core.validators import FileExtensionValidator
+from .service.users.services import validate_size_image
 
 
 class CreateUserForm(UserCreationForm):
@@ -16,6 +18,12 @@ class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['img', 'email', 'first_name', 'last_name']
+
+
+class ImageForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['img']
 
 
 class LoginForm(forms.Form):

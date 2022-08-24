@@ -1,0 +1,51 @@
+{% extends 'web/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}
+    <title>Register Page</title>
+{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock style %}
+{% block content %}
+    <section class="profile_section">
+        {#        <h1>Hey {{ user }}</h1>#}
+        {#        <img src="{{ profile_model.img.url }}" alt>#}
+        {#        <form method="post" enctype="multipart/form-data">#}
+        {#            {% csrf_token %}#}
+        {##}
+        {#            {{ img.as_p }}#}
+        {#            <button type="submit">Подвердить</button>#}
+        {#        </form>#}
+        {#    {{ errors.errors.img }}#}
+        <div class="profile_container">
+            <div class="profile_container_block">
+                <div class="main_profile_info">
+                    <div class="profile_image">
+                        <img src="{{ profile_model.img.url }}" alt>
+                        <form class="profile_form" method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            {{ img.img|add_class:"profile_btn_image"}}
+                            <button id='some_button' class="profile_btn_success" type="submit">
+                                Загрузить
+                            </button>
+                        </form>
+                    </div>
+                    <div class="profile_name">
+                        {{ profile_model.user }}
+                        {{ profile_model.email }}
+                    </div>
+                </div>
+                <div class="profile_navigation">
+
+                </div>
+            </div>
+            <div class="profile_container_info">
+
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'js/avatar_button_click.js' %}"></script>
+{% endblock content %}
