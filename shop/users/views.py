@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.shortcuts import HttpResponse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout, login, authenticate
 from .forms import ProfileForm, CreateUserForm, LoginForm
 
 
@@ -12,7 +13,7 @@ class RegisterPageView(View):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect('main_page')
+            return redirect('login_page')
         return render(request, self.template_name,
                       {'profile_form': ProfileForm,
                        'user_form': CreateUserForm})
@@ -25,7 +26,8 @@ class RegisterPageView(View):
                 stud = profile_form.save(commit=False)
                 stud.user = user_form.save()
                 stud.save()
-                return redirect('logout_page')
+                logout(request)
+                return redirect('login_page')
         return render(request, self.template_name,
                       {'profile_form': profile_form,
                        'user_form': user_form})
@@ -35,5 +37,21 @@ class LoginPageView(View):
     template = 'users/login.html'
 
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('main_page')
         return render(request, self.template,
                       {'login_form': LoginForm})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.login()
+            if user:
+                login(request, user)
+                return redirect('main_page')
+        return render(request, self.template, {'login_form': form})
+
+
+class ProfilePageView(View):
+    def get(self, request):
+        return HttpResponse('Hey')

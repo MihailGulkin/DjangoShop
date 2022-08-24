@@ -5,31 +5,31 @@
     <title>Register Page</title>
 {% endblock title %}
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register_login.css' %}">
 {% endblock style %}
 {% block content %}
-    <section class="register_section">
-        <div class="register_container">
-            <div class="register_name_container">
+    <section class="register_login_section">
+        <div class="register_login_container">
+            <div class="register_login_name_container">
                 <h2>РЕГИСТРАЦИЯ</h2>
             </div>
-            <form class="register_post_form" method="post">
+            <form class="register_login_post_form" method="post">
                 {% csrf_token %}
-                <div class="register_container_fields">
-                    {{ profile_form.first_name|add_class:'register_form_fields'|append_attr:'placeholder:Имя' }}
+                <div class="register_login_container_fields">
+                    {{ profile_form.first_name|add_class:'register_login_form_fields'|append_attr:'placeholder:Имя' }}
                     {{ profile_form.errors.first_name}}
-                    {{ profile_form.last_name|add_class:'register_form_fields'| append_attr:'placeholder:Фамилия' }}
+                    {{ profile_form.last_name|add_class:'register_login_form_fields'| append_attr:'placeholder:Фамилия' }}
                     {{ profile_form.errors.last_name}}
-                    {{ profile_form.email|add_class:'register_form_fields'| append_attr:'placeholder:E-mail' }}
+                    {{ profile_form.email|add_class:'register_login_form_fields'| append_attr:'placeholder:E-mail' }}
                     {{ profile_form.errors.email}}
-                    {{ user_form.username|remove_attr:"autofocus"|add_class:'register_form_fields'| append_attr:'placeholder:Логин' }}
+                    {{ user_form.username|remove_attr:"autofocus"|add_class:'register_login_form_fields'| append_attr:'placeholder:Логин' }}
                     {{ user_form.errors.username}}
-                    {{ user_form.password1|add_class:'register_form_fields'|append_attr:'placeholder:Пароль' }}
+                    {{ user_form.password1|add_class:'register_login_form_fields'|append_attr:'placeholder:Пароль' }}
                     {{ user_form.errors.password1}}
-                    {{ user_form.password2|add_class:'register_form_fields'|append_attr:'placeholder:Подтвердите пароль' }}
+                    {{ user_form.password2|add_class:'register_login_form_fields'|append_attr:'placeholder:Подтвердите пароль' }}
                     {{ user_form.errors.password2}}
                 </div>
-                <button class="register_btn" type="submit">РЕГИСТРАЦИЯ</button>
+                <button class="register_login_btn" type="submit">РЕГИСТРАЦИЯ</button>
             </form>
         </div>
     </section>

@@ -13,20 +13,23 @@ a
     box-shadow: 0 4px 6px -6px #222;
 }
 
-.a_container:hover
-{
-    color: lightgreen;
-    transition: .2s;
-    opacity: 0.8;
-}
 
-.ul_container
+.base_div_container
 {
     display: flex;
     justify-content: center;
     max-height: 100px;
 }
-
+.ul_container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+/*.ul_container_right*/
+/*{*/
+/*    justify-content: flex-end;*/
+/*}*/
 .li_container
 {
     display: flex;
@@ -38,7 +41,14 @@ a
 .a_container
 {
     opacity: 0.8;
+    font-size: 16px;
     font-family: 'Montserrat', sans-serif;
+}
+.a_container:hover
+{
+    color: lightgreen;
+    transition: .2s;
+    opacity: 0.8;
 }
 
 .a_container_img

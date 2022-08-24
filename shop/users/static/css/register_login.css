@@ -1,4 +1,4 @@
-.register_section
+.register_login_section
 {
     min-height: calc(100vh - 350px);
     margin-top: 100px;
@@ -8,7 +8,7 @@
     background: linear-gradient(to bottom, #1C352D 0%, #0D261E 100%);
 }
 
-.register_container
+.register_login_container
 {
     width: 500px;
     /*height: 650px;*/
@@ -25,7 +25,7 @@
 
 }
 
-.register_post_form
+.register_login_post_form
 {
     height: 100%;
     display: flex;
@@ -34,7 +34,7 @@
     align-items: center;
 }
 
-.register_name_container
+.register_login_name_container
 {
     margin-top: 15px;
     color: #222222;
@@ -44,16 +44,18 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.register_container_fields
+.register_login_container_fields
 {
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 15px;
     margin-top: 15px;
+    align-items: center;
+    text-align: center;
 }
 
-.register_form_fields
+.register_login_form_fields
 {
     margin-bottom: 10px;
     margin-top: 10px;
@@ -83,7 +85,7 @@ input::placeholder
 }
 
 
-.register_btn
+.register_login_btn
 {
     border-radius: 7px;
     width: 300px;
@@ -100,7 +102,7 @@ input::placeholder
 
 }
 
-.register_btn:hover
+.register_login_btn:hover
 {
     background: #06c77e;
     cursor: pointer;

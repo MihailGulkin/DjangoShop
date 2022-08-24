@@ -5,10 +5,28 @@
     <title>Login Page</title>
 {% endblock title %}
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register_login.css' %}">
 {% endblock style %}
 {% block content %}
-    <section class="login_section">
-        {{ login_form.as_p }}
+    <section class="register_login_section">
+        <div class="register_login_container">
+            <div class="register_login_name_container">
+                <h2>ВХОД</h2>
+            </div>
+            <form class="register_login_post_form" method="post">
+                {% csrf_token %}
+                <div class="register_login_container_fields">
+                    {{ login_form.username|remove_attr:"autofocus"|add_class:'register_login_form_fields'| append_attr:'placeholder:Логин' }}
+                    {% if 'login' in login_form.non_field_errors.0 %}
+                        {{ login_form.non_field_errors }}
+                    {% endif %}
+                    {{ login_form.password|add_class:'register_login_form_fields'|append_attr:'placeholder:Пароль' }}
+                    {% if 'password' in login_form.non_field_errors.0  %}
+                        {{ login_form.non_field_errors }}
+                    {% endif %}
+                </div>
+                <button class="register_login_btn" type="submit">ВОЙТИ</button>
+            </form>
+        </div>
     </section>
 {% endblock content %}
