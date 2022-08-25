@@ -27,19 +27,31 @@
                               enctype="multipart/form-data">
                             {% csrf_token %}
 
-                            {{ img.img|add_class:"profile_btn_image"}}
-                            <button id='some_button' class="profile_btn_success" type="submit">
+                            {{ img.img|add_class:"profile_btn_image" }}
+                            <button id='some_button'
+                                    class="profile_btn_success"
+                                    type="submit">
                                 Загрузить
                             </button>
                         </form>
                     </div>
                     <div class="profile_name">
-                        {{ profile_model.user }}
-                        {{ profile_model.email }}
+                        <p>{{ errors.errors.img.0 }}</p>
+
+                        <h1>{{ profile_model.user }}</h1>
+                        <h4>{{ profile_model.email }}</h4>
                     </div>
                 </div>
                 <div class="profile_navigation">
-
+                    <ul class="profile_ul_navigation">
+                        <li class="profile_li_container">
+                            <a href="{% url 'profile_page' %}">Главная</a>
+                        </li>
+                        <li class="profile_li_container">
+                            <a href="{% url 'personal_page' %}">Личная
+                                информация</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="profile_container_info">

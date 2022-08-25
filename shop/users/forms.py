@@ -1,23 +1,37 @@
+import logging
+
 from django.forms import ModelForm
 from django import forms
 from .models import Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.core.validators import FileExtensionValidator
-from .service.users.services import validate_size_image
 
 
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2', 'email']
 
 
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['img', 'email', 'first_name', 'last_name']
+
+    def clean(self):
+        if self.cleaned_data.get('first_name') == \
+                self.cleaned_data.get('last_name'):
+            raise forms.ValidationError(
+                'Sorry, first_name and second_name cannot be same'
+            )
+        if Profile.objects.filter(
+                email=self.cleaned_data.get('email')).exists():
+            raise forms.ValidationError(
+                'Sorry, email already exist'
+            )
+
+        return self.cleaned_data
 
 
 class ImageForm(ModelForm):

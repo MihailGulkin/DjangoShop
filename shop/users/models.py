@@ -35,3 +35,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.first_name}'
+
+    # Добавляет проверку на уровне ДБ
+    # class Meta:
+    #     constraints = [
+    #         models.CheckConstraint(
+    #             check=~models.Q(first_name=models.F('last_name')),
+    #             name='first_and_last_names_different'),
+    #     ]

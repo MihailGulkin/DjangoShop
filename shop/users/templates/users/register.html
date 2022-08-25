@@ -20,8 +20,13 @@
                     {{ profile_form.errors.first_name}}
                     {{ profile_form.last_name|add_class:'register_login_form_fields'| append_attr:'placeholder:Фамилия' }}
                     {{ profile_form.errors.last_name}}
+                    {% if 'first_name' in profile_form.non_field_errors.0 and not profile_form.errors.last_name %}
+                        {{ profile_form.non_field_errors }}
+                    {% endif %}
                     {{ profile_form.email|add_class:'register_login_form_fields'| append_attr:'placeholder:E-mail' }}
-                    {{ profile_form.errors.email}}
+                        {% if 'email' in profile_form.non_field_errors.0 %}
+                            {{ profile_form.non_field_errors }}
+                        {% endif %}
                     {{ user_form.username|remove_attr:"autofocus"|add_class:'register_login_form_fields'| append_attr:'placeholder:Логин' }}
                     {{ user_form.errors.username}}
                     {{ user_form.password1|add_class:'register_login_form_fields'|append_attr:'placeholder:Пароль' }}
