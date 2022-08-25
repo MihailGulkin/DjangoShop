@@ -2,22 +2,15 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block title %}
-    <title>Register Page</title>
+    <title>Profile Page</title>
 {% endblock title %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_profile.css'%}">
+    <link rel="stylesheet" href="{% static 'css/personal_profile.css' %}">
 {% endblock style %}
 {% block content %}
     <section class="profile_section">
-        {#        <h1>Hey {{ user }}</h1>#}
-        {#        <img src="{{ profile_model.img.url }}" alt>#}
-        {#        <form method="post" enctype="multipart/form-data">#}
-        {#            {% csrf_token %}#}
-        {##}
-        {#            {{ img.as_p }}#}
-        {#            <button type="submit">Подвердить</button>#}
-        {#        </form>#}
-        {#    {{ errors.errors.img }}#}
         <div class="profile_container">
             <div class="profile_container_block">
                 <div class="main_profile_info">
@@ -54,9 +47,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="profile_container_info">
-
-            </div>
+            {% block profile %}
+            {% endblock profile %}
         </div>
     </section>
     <script src="{% static 'js/avatar_button_click.js' %}"></script>

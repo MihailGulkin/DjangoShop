@@ -53,7 +53,7 @@ class LoginPageView(View):
 
 
 class ProfilePageView(LoginRequiredMixin, View):
-    template = 'users/profile.html'
+    template = 'users/main_profile.html'
     login_url = 'login_page'
 
     def get(self, request):
@@ -79,11 +79,11 @@ class ProfilePageView(LoginRequiredMixin, View):
 
 
 class ProfilePersonalPageView(LoginRequiredMixin, View):
-    template = 'users/personal.html'
+    template = 'users/personal_profile.html'
     login_url = 'login_page'
 
     def get(self, request):
         profile = Profile.objects.get(user=request.user)
-
+        logging.getLogger('df').error('Зашёл')
         return render(request, self.template, {'profile_model': profile,
                                                'img': ImageForm})

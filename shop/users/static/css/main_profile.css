@@ -1,0 +1,37 @@
+.profile_container_info
+{
+    width: 60%;
+    margin: 50px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile_container_info > h1
+{
+    text-align: start;
+    width: 100%;
+    color: #888888;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+
+}
+
+.profile_container_info_msg
+{
+    background: #ffffff;
+    border-radius: 7px;
+    width: 100%;
+    height: 30%;
+}
+
+.profile_container_info_msg > h2
+{
+    text-align: start;
+    width: 100%;
+    color: #222222;
+    font-family: 'Open Sans', sans-serif;
+    padding-left: 10px;
+}
