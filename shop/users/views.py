@@ -84,6 +84,7 @@ class ProfilePersonalPageView(LoginRequiredMixin, View):
 
     def get(self, request):
         profile = Profile.objects.get(user=request.user)
-        logging.getLogger('df').error('Зашёл')
-        return render(request, self.template, {'profile_model': profile,
-                                               'img': ImageForm})
+        return render(request, self.template,
+                      {'profile_model': profile,
+                       'img': ImageForm,},
+                      )

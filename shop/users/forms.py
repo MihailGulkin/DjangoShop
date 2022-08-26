@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'email']
+        fields = ['username', 'password1', 'password2']
 
 
 class ProfileForm(ModelForm):
@@ -62,3 +62,4 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         return user
+

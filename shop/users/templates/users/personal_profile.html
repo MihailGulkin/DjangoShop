@@ -4,8 +4,25 @@
 {% block profile %}
     <div class="profile_container_info">
         <h1>Личная информация</h1>
-        <div class="profile_container_info_msg">
-            <h2>Мои комментарии</h2>
+        <div class="profile_container_personal_info">
+            <ul class="profile_ul_container_personal_fields">
+                <li class="profile_li_container_personal_field">
+                    <h4>Имя</h4>
+                    <a>{{ profile_model.first_name }}</a>
+                </li>
+                <li class="profile_li_container_personal_field">
+                    <h4>Фамилия</h4>
+                    <a>{{ profile_model.last_name }}</a>
+                </li>
+                <li class="profile_li_container_personal_field">
+                    <h4>E-mail</h4>
+                    <a>{{ profile_model.email }}</a>
+                </li>
+                <li class="profile_li_container_personal_field">
+                    <h4>Никнейм</h4>
+                    <a>{{ profile_model.user.username }}</a>
+                </li>
+            </ul>
         </div>
     </div>
 {% endblock profile %}

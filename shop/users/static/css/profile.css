@@ -21,7 +21,7 @@
 
 .profile_container_block
 {
-    height: 80%;
+    height: 70%;
     width: 30%;
     max-width: 500px;
     min-height: 650px;
@@ -186,4 +186,8 @@ input[type='file']
     transition: .7s;
 }
 
-
+.activate_btn_a
+{
+    background: #ffffff !important;
+    color: #52b087FF !important;
+}

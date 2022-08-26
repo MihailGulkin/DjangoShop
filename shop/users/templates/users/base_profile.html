@@ -38,10 +38,10 @@
                 <div class="profile_navigation">
                     <ul class="profile_ul_navigation">
                         <li class="profile_li_container">
-                            <a href="{% url 'profile_page' %}">Главная</a>
+                            <a id="profile_a_main" href="{% url 'profile_page' %}">Главная</a>
                         </li>
                         <li class="profile_li_container">
-                            <a href="{% url 'personal_page' %}">Личная
+                            <a id="profile_a_personal" href="{% url 'personal_page' %}">Личная
                                 информация</a>
                         </li>
                     </ul>
@@ -52,4 +52,5 @@
         </div>
     </section>
     <script src="{% static 'js/avatar_button_click.js' %}"></script>
+    <script src="{% static 'js/add_active_button_effect.js' %}"></script>
 {% endblock content %}
