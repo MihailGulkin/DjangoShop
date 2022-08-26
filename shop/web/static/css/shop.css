@@ -130,7 +130,7 @@
     height: 250px;
 }
 
-.shop_product_container > h3
+.shop_product_container > a
 {
     font-family: 'Montserrat', sans-serif;
     color: #222222;

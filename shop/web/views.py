@@ -1,12 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .models import Product
-from .forms import ProductForm
-from django.shortcuts import redirect
 
 
 class MainPageView(View):
-
     # region important
     objects = {'object_1': ['image/paw.svg',
                             'СМАРТФОНЫ',
@@ -41,6 +38,7 @@ class MainPageView(View):
                              'adipiscing elit. Proin consequat sollicitudin '
                              'cursus. Dolor sit amet, consectetur adipiscing '
                              'elit proin consequat.']}
+
     # endregion
 
     def get(self, request):
@@ -54,3 +52,9 @@ class ShopPageView(View):
     def get(self, request):
         return render(request, 'web/shop.html',
                       {'products': self.products})
+
+
+class ShopItemPageView(View):
+    def get(self, request, pk):
+        return render(request, 'web/shop_item_detail.html',
+                      {'product': get_object_or_404(Product, pk=pk)})
