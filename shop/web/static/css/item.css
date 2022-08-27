@@ -1,5 +1,22 @@
+
 .item_section
 {
     min-height: calc(100vh - 250px);
-    max-width: 1600px;
+    margin-top: 100px;
+    height: 100%;
+}
+
+.item_container
+{
+    height: 100%;
+    width: 100%;
+}
+.item_name_img
+{
+    width: 50%;
+}
+.item_img
+{
+    width: 350px;
+    height: 250px;
 }

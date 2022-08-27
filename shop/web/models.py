@@ -1,5 +1,6 @@
 from django.db import models
-
+from users.models import Profile
+from django.core.validators import MaxLengthValidator, MaxValueValidator
 
 class Product(models.Model):
     MOBILE = 'mobile'
@@ -24,3 +25,14 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Bucket(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1, validators=[
+        MaxValueValidator(100),
+    ])
+
+    def __str__(self):
+        return f'{self.owner.user.username} - {self.product.name}'

@@ -1,6 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+import logging
+
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from .models import Product
+from .models import Product, Bucket
+from .forms import BucketForm
+from users.models import Profile
 
 
 class MainPageView(View):
@@ -55,6 +59,35 @@ class ShopPageView(View):
 
 
 class ShopItemPageView(View):
+    template = 'web/shop_item_detail.html'
+
     def get(self, request, pk):
-        return render(request, 'web/shop_item_detail.html',
-                      {'product': get_object_or_404(Product, pk=pk)})
+        return render(request, self.template,
+                      {'product': get_object_or_404(Product, pk=pk),
+                       'bucket_model': Bucket.objects.filter(
+                           owner=Profile.objects.get(user=request.user),
+                           product=get_object_or_404(Product, pk=pk),
+                        ), }
+                      )
+
+    def post(self, request, pk):
+        # quantity = BucketForm(request.POST)
+        profile_obj = Profile.objects.get(user=request.user)
+        product_obj = get_object_or_404(Product, pk=pk)
+
+        if not Bucket.objects.filter(product=product_obj,
+                                     owner=profile_obj).exists():
+            Bucket(owner=profile_obj, product=product_obj, quantity=1).save()
+            return redirect('shop_item_page', pk=pk)
+        #
+        # if not quantity.is_valid():
+        #     return render(request, self.template,
+        #                   {'product': product_obj,
+        #                    'bucket': quantity})
+        #
+        # bucket = Bucket.objects.get(product=product_obj,
+        #                             owner=profile_obj)
+        # bucket.quantity += quantity.cleaned_data.get('quantity')
+        # bucket.save()
+        # return redirect('shop_item_page', pk=pk)
+        # #

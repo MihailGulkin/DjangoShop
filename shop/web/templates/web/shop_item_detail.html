@@ -6,6 +6,23 @@
 {% endblock style %}
 {% block content %}
     <section class="item_section">
-
+        <div class="item_container">
+            <div class="item_name_img">
+                <h1>{{ product.name }}</h1>
+                <img class="item_img" src="{{ product.img.url }}" alt>
+                {% if not bucket_model.all %}
+                    <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit">Добавить в корзину</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div>
+                        <a href="{% url 'profile_page' %}">Перейти в корзину</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </section>
 {% endblock content %}
