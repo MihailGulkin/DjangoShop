@@ -1,0 +1,62 @@
+{% extends 'web/base.html' %}
+{% load  static %}
+{% load widget_tweaks %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/shop_item_base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop_item.css' %}">
+{% endblock style %}
+{% block content %}
+    <section class="item_section">
+        <div class="item_name">
+            <h1>{{ product.name }}</h1>
+        </div>
+        <div class="item_container">
+            <div class="item_img_block">
+                <div class="item_img_container">
+                    <img class="item_img" src="{{ product.img.url }}" alt>
+                </div>
+            </div>
+            <div class="item_btn_block">
+                <div class="item_btn_header item_btn_cont">
+                    {% if product.availability %}
+                        <h4 class='js_locker'>В наличии</h4>
+                    {% else %}
+                        <h4 class="js_locker">Ожидается</h4>
+                    {% endif %}
+                </div>
+                {% if not bucket_model.all %}
+                    <form method="post" class="item_btn_cont">
+                        {% csrf_token %}
+                        <button class="item_btn" type="submit">
+                            Добавить в корзину
+                        </button>
+                    </form>
+                {% else %}
+                    <div class="item_btn_container item_btn_cont">
+                        <a class="item_btn" href="{% url 'profile_page' %}">
+                            Перейти в корзину
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="sub_container">
+            <div class="header_block">
+                <ul class="description_ul_block">
+                    <li class="description_li_block"><a id="desc_a"
+                                                        href="{% url 'shop_item_page' product.pk %}"
+                                                        class="description_a">Описание</a>
+                    </li>
+                    <li class="description_li_block"><a id="id_comment"
+                                                        href="{% url 'shop_item_comment_page' product.pk %}"
+                                                        class="description_a">Отзывы</a>
+                    </li>
+                </ul>
+            </div>
+            {% block sub %}
+            {% endblock sub %}
+        </div>
+    </section>
+    <script src="{% static 'js/js_lock_button.js' %}"></script>
+    <script src="{% static 'js/add_active_button_effect_web.js' %}"></script>
+{% endblock content %}

@@ -47,7 +47,8 @@ class MainPageView(View):
 
     def get(self, request):
         return render(request, 'web/main.html', {'objects': self.objects,
-                                                 'teams': self.teams})
+                                                 'teams': self.teams,
+                                                 })
 
 
 class ShopPageView(View):
@@ -56,7 +57,9 @@ class ShopPageView(View):
     def get(self, request):
         return render(request, 'web/shop.html',
                       {'products': self.products})
-
+    def post(self, request):
+        logging.error(request.POST)
+        return redirect('shop_page')
 
 class ShopItemPageView(View):
     template = 'web/shop_item_detail.html'
@@ -67,7 +70,7 @@ class ShopItemPageView(View):
                        'bucket_model': Bucket.objects.filter(
                            owner=Profile.objects.get(user=request.user),
                            product=get_object_or_404(Product, pk=pk),
-                        ), }
+                       ), }
                       )
 
     def post(self, request, pk):
@@ -91,3 +94,25 @@ class ShopItemPageView(View):
         # bucket.save()
         # return redirect('shop_item_page', pk=pk)
         # #
+
+
+class ShopCommentItemPage(View):
+    template = 'web/shop_item_detail_comments.html'
+
+    def get(self, request, pk):
+        return render(request, self.template,
+                      {'product': get_object_or_404(Product, pk=pk),
+                       'bucket_model': Bucket.objects.filter(
+                           owner=Profile.objects.get(user=request.user),
+                           product=get_object_or_404(Product, pk=pk),
+                       ), }
+                      )
+
+    def post(self, request, pk):
+        profile_obj = Profile.objects.get(user=request.user)
+        product_obj = get_object_or_404(Product, pk=pk)
+
+        if not Bucket.objects.filter(product=product_obj,
+                                     owner=profile_obj).exists():
+            Bucket(owner=profile_obj, product=product_obj, quantity=1).save()
+            return redirect('shop_item_comment_page', pk=pk)
