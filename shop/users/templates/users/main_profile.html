@@ -1,11 +1,25 @@
 {% extends 'users/base_profile.html' %}
 {% load widget_tweaks %}
+{% block title %}
+    <title>Profile</title>
+{% endblock title %}
 {% load static %}
 {% block profile %}
     <div class="profile_container_info">
         <h1>Активность в соообществе</h1>
         <div class="profile_container_info_msg">
-            <h2>Мои комментарии</h2>
+            <h2>Мои отзывы({{ user_comment.count }})</h2>
+            {% for comment in user_comment %}
+                <ul>
+                    <li>{{ comment.date }}</li>
+                    <li><a href="{% url 'shop_item_comment_page' pk=comment.product.pk %}#{{ comment.date }}{{ comment.author.user.username }}">{{ comment.product }}</a></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            {% endfor %}
+{#            <a>href="{% url 'shop_item_comment_page' pk=user_comment.0.product.pk %}#{{ user_comment.0.date }}{{ user_comment.0.author.user.username }}">Перейти на комментарий</a>#}
+
         </div>
+
     </div>
 {% endblock profile %}

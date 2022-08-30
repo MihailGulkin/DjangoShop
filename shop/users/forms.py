@@ -63,3 +63,44 @@ class LoginForm(forms.Form):
         user = authenticate(username=username, password=password)
         return user
 
+
+class ProfileChangeForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['email', 'first_name', 'last_name']
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(ProfileChangeForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        profile = Profile.objects.get(user=self.request.user)
+        email = self.cleaned_data.get('email')
+
+        if Profile.objects.filter(email=email).exists() \
+                and email != profile.email:
+            raise forms.ValidationError(
+                'Sorry, this email already registered'
+            )
+        return self.cleaned_data
+
+
+class UsernameChangeForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(UsernameChangeForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        profile = Profile.objects.get(user=self.request.user)
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists() \
+                and username != profile.user.username:
+            raise forms.ValidationError(
+                'Sorry, this username already used'
+            )
+
+        return self.cleaned_data

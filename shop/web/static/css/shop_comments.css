@@ -1,0 +1,62 @@
+.comments_section
+{
+    max-width: 100%;
+    margin-bottom: 100px;
+
+}
+
+.comments_section > h1
+{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+}
+
+.comments_container
+{
+    padding: 0 300px;
+    display: flex;
+    border-bottom: 1px solid rgba(136, 136, 136, 0.13);
+}
+
+.comments_avatar > img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 6px;
+    margin-right: 20px;
+    box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+.comments_author
+{
+    padding-top: 100px;
+    margin-top: -100px;
+}
+.comments_author > h2
+{
+    padding-bottom: 20px;
+    font-size: 24px;
+    color: #222222;
+}
+
+.comment_h2
+{
+    font-weight: 600;
+    color: rgba(34, 34, 34, 0.84);
+    font-size: 19px;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -1px;
+}
+
+.comment_p
+{
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.comments_date
+{
+    text-align: end;
+    margin-bottom: 10px;
+}

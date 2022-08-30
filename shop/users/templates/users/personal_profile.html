@@ -1,28 +1,37 @@
 {% extends 'users/base_profile.html' %}
 {% load widget_tweaks %}
+{% block title %}
+    <title>Profile</title>
+{% endblock title %}
 {% load static %}
 {% block profile %}
     <div class="profile_container_info">
         <h1>Личная информация</h1>
         <div class="profile_container_personal_info">
-            <ul class="profile_ul_container_personal_fields">
-                <li class="profile_li_container_personal_field">
-                    <h4>Имя</h4>
-                    <a>{{ profile_model.first_name }}</a>
-                </li>
-                <li class="profile_li_container_personal_field">
-                    <h4>Фамилия</h4>
-                    <a>{{ profile_model.last_name }}</a>
-                </li>
-                <li class="profile_li_container_personal_field">
-                    <h4>E-mail</h4>
-                    <a>{{ profile_model.email }}</a>
-                </li>
-                <li class="profile_li_container_personal_field">
-                    <h4>Никнейм</h4>
-                    <a>{{ profile_model.user.username }}</a>
-                </li>
-            </ul>
+            <form class="profile_container_post" method="post">
+                {% csrf_token %}
+                <ul class="profile_ul_container_personal_fields">
+                    <li class="profile_li_container_personal_field">
+                        <h4>Имя</h4>
+                        {{ form_profile.first_name}}
+                    </li>
+                    <li class="profile_li_container_personal_field">
+                        <h4>Фамилия</h4>
+                        {{ form_profile.last_name}}
+                    </li>
+                    <li class="profile_li_container_personal_field">
+                        <h4>E-mail</h4>
+                        {{ form_profile.email }}
+                        {{ form_profile.non_field_errors }}
+                    </li>
+                    <li class="profile_li_container_personal_field">
+                        <h4>Никнейм</h4>
+                        {{ form_username.username }}
+                        <p>{{ form_username.non_field_errors }}</p>
+                    </li>
+                </ul>
+                <button class="profile_btn_change_data">Внести изменения</button>
+            </form>
         </div>
     </div>
 {% endblock profile %}

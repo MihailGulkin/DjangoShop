@@ -4,6 +4,7 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/shop_item_base.css' %}">
     <link rel="stylesheet" href="{% static 'css/shop_item.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shop_comments.css' %}">
 {% endblock style %}
 {% block content %}
     <section class="item_section">
@@ -38,18 +39,21 @@
                         </a>
                     </div>
                 {% endif %}
+                <div class="item_btn_container item_btn_cont">
+                    <a class="item_btn_comment" href="{% url 'product_comment' pk=product.pk %}">Оставить отзыв</a>
+                </div>
             </div>
         </div>
         <div class="sub_container">
             <div class="header_block">
                 <ul class="description_ul_block">
-                    <li class="description_li_block"><a id="desc_a"
-                                                        href="{% url 'shop_item_page' product.pk %}"
-                                                        class="description_a">Описание</a>
+                    <li class="description_li_block">
+                        <a id="desc_a" href="{% url 'shop_item_page' product.pk %}" class="description_a">Описание</a>
+
                     </li>
                     <li class="description_li_block"><a id="id_comment"
                                                         href="{% url 'shop_item_comment_page' product.pk %}"
-                                                        class="description_a">Отзывы</a>
+                                                        class="description_a">Отзывы {{ comments.count }}</a>
                     </li>
                 </ul>
             </div>

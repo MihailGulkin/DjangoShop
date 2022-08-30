@@ -1,0 +1,30 @@
+{% extends 'web/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/comment_send.css'%}">
+{% endblock style%}
+{% block content %}
+    <section class="comment_section">
+        <h1>Отсавьте свой отзыв здесь</h1>
+        <form class="comment_post_section" method="post">
+            {% csrf_token %}
+            <div class="comment_container">
+                <h1>Достоинства</h1>
+                {{ product_review.product_pros|add_class:'comment_text_area'}}
+            </div>
+            <div class="comment_container">
+                <h1>Недостатки</h1>
+                {{ product_review.product_cons|add_class:'comment_text_area' }}
+            </div>
+            <div class="comment_container">
+                <h1>Комментарии</h1>
+                {{ product_review.product_comment|add_class:'comment_text_area' }}
+            </div>
+            <div class="comment_button_container">
+                <button class="comment_button">Опубликовать отзыв</button>
+            </div>
+            {{ product_review.errors }}
+        </form>
+    </section>
+{% endblock content %}

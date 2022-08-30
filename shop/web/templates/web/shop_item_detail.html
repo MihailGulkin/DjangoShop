@@ -1,4 +1,7 @@
 {% extends 'web/shop_item_base.html' %}
+{% block title %}
+    <title>{{ product.name }}</title>
+{% endblock title %}
 {% block sub %}
     <p class="detail_p_container">{{ product.description }}</p>
 {% endblock sub %}

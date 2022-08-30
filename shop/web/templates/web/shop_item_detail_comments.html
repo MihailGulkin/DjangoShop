@@ -1,1 +1,37 @@
 {% extends 'web/shop_item_base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}
+    <title>{{ product.name }}</title>
+{% endblock title %}
+{% block sub %}
+    <section class="comments_section">
+        {% if comment_form %}
+            {% for comment in comment_form %}
+                <div class="comments_container">
+                    <div class="comments_avatar">
+                        <img src="{{ comment.author.img.url }}">
+                    </div>
+                    <div>
+                        <div id="{{comment.date}}{{ comment.author.user.username }}" class="comments_author">
+                            <h2 class="comment_h2">{{ comment.author }} {{ comment.author.last_name.0 }}.</h2>
+                        </div>
+                        <div class="comments_view">
+                            <h2 class="comment_h2">Достоинства</h2>
+                            <p class="comment_p">{{ comment.product_pros }}</p>
+                            <h2 class="comment_h2">Недостатки</h2>
+                            <p class="comment_p">{{ comment.product_cons }}</p>
+                            <h2 class="comment_h2">Комментарии</h2>
+                            <p class="comment_p">{{ comment.product_comment }}</p>
+                        </div>
+                        <div class="comments_date">
+                            <time class="comment_p">{{ comment.date }}</time>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h1>Здесь пока нет отзывов</h1>
+        {% endif %}
+    </section>
+{% endblock sub %}

@@ -2,8 +2,9 @@ import logging
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from .models import Product, Bucket
-from .forms import BucketForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Product, Bucket, CommentReviewAboutProduct
+from .forms import BucketForm, CommentReviewForm
 from users.models import Profile
 
 
@@ -52,17 +53,17 @@ class MainPageView(View):
 
 
 class ShopPageView(View):
-    products = Product.objects.all()
+    template = 'web/shop.html'
 
     def get(self, request):
-        return render(request, 'web/shop.html',
-                      {'products': self.products})
-    def post(self, request):
-        logging.error(request.POST)
-        return redirect('shop_page')
+        products = Product.objects.all()
+        return render(request, self.template,
+                      {'products': products})
 
-class ShopItemPageView(View):
+
+class ShopItemPageView(LoginRequiredMixin, View):
     template = 'web/shop_item_detail.html'
+    login_url = 'login_page'
 
     def get(self, request, pk):
         return render(request, self.template,
@@ -70,42 +71,37 @@ class ShopItemPageView(View):
                        'bucket_model': Bucket.objects.filter(
                            owner=Profile.objects.get(user=request.user),
                            product=get_object_or_404(Product, pk=pk),
-                       ), }
+                       ),
+                       'comments': CommentReviewAboutProduct.objects.filter(
+                           product=get_object_or_404(Product, pk=pk))}
                       )
 
     def post(self, request, pk):
-        # quantity = BucketForm(request.POST)
         profile_obj = Profile.objects.get(user=request.user)
         product_obj = get_object_or_404(Product, pk=pk)
 
         if not Bucket.objects.filter(product=product_obj,
                                      owner=profile_obj).exists():
             Bucket(owner=profile_obj, product=product_obj, quantity=1).save()
-            return redirect('shop_item_page', pk=pk)
-        #
-        # if not quantity.is_valid():
-        #     return render(request, self.template,
-        #                   {'product': product_obj,
-        #                    'bucket': quantity})
-        #
-        # bucket = Bucket.objects.get(product=product_obj,
-        #                             owner=profile_obj)
-        # bucket.quantity += quantity.cleaned_data.get('quantity')
-        # bucket.save()
-        # return redirect('shop_item_page', pk=pk)
-        # #
+        return redirect('shop_item_page', pk=pk)
 
 
 class ShopCommentItemPage(View):
     template = 'web/shop_item_detail_comments.html'
 
     def get(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        profile = Profile.objects.get(user=request.user)
         return render(request, self.template,
-                      {'product': get_object_or_404(Product, pk=pk),
+                      {'product': product,
                        'bucket_model': Bucket.objects.filter(
-                           owner=Profile.objects.get(user=request.user),
-                           product=get_object_or_404(Product, pk=pk),
-                       ), }
+                           owner=profile,
+                           product=product, ),
+                       'comment_form': CommentReviewAboutProduct.objects.filter
+                       (product=product),
+                       'comments': CommentReviewAboutProduct.objects.filter(
+                           product=get_object_or_404(Product, pk=pk))
+                       }
                       )
 
     def post(self, request, pk):
@@ -115,4 +111,23 @@ class ShopCommentItemPage(View):
         if not Bucket.objects.filter(product=product_obj,
                                      owner=profile_obj).exists():
             Bucket(owner=profile_obj, product=product_obj, quantity=1).save()
+        return redirect('shop_item_comment_page', pk=pk)
+
+
+class ShopItemSendCommentView(View):
+    template = 'web/send_comment.html'
+
+    def get(self, request, pk):
+        return render(request, self.template,
+                      {'product_review': CommentReviewForm()})
+
+    def post(self, request, pk):
+        comment_form = CommentReviewForm(request.POST)
+        if comment_form.is_valid():
+            sub_form = comment_form.save(commit=False)
+            sub_form.author = Profile.objects.get(user=request.user)
+            sub_form.product = Product.objects.get(pk=pk)
+            sub_form.save()
             return redirect('shop_item_comment_page', pk=pk)
+        return render(request, self.template,
+                      {'product_review': comment_form})

@@ -1,6 +1,10 @@
+import datetime
+
 from django.db import models
 from users.models import Profile
+from django.utils import timezone
 from django.core.validators import MaxLengthValidator, MaxValueValidator
+
 
 class Product(models.Model):
     MOBILE = 'mobile'
@@ -36,3 +40,18 @@ class Bucket(models.Model):
 
     def __str__(self):
         return f'{self.owner.user.username} - {self.product.name}'
+
+
+class CommentReviewAboutProduct(models.Model):
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_pros = models.TextField(max_length=2000, null=True)
+    product_cons = models.TextField(max_length=2000, null=True)
+    product_comment = models.TextField(max_length=2000, null=True)
+    date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-date']
+
+    def __str__(self):
+        return f'{self.author.user.username} - {self.product.name}'

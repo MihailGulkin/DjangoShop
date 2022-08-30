@@ -1,8 +1,11 @@
 from django.urls import path
-from .views import MainPageView, ShopPageView, ShopItemPageView, ShopCommentItemPage
+from .views import MainPageView, ShopPageView, ShopItemPageView, \
+    ShopCommentItemPage, ShopItemSendCommentView
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page'),
+    path('shop/<int:pk>/send_comment', ShopItemSendCommentView.as_view(),
+         name='product_comment'),
     path('shop/<int:pk>/comments/', ShopCommentItemPage.as_view(),
          name='shop_item_comment_page'),
     path('shop/<int:pk>', ShopItemPageView.as_view(), name='shop_item_page'),
