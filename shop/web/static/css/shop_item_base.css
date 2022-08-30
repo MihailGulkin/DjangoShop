@@ -51,8 +51,8 @@
 {
     width: 100%;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: flex-end;
     height: 100%;
 }
 
@@ -61,15 +61,21 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-right: 100px;
+    margin-right: 50px;
 }
-
+.item_btn_header
+{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
 .item_btn_header > h4
 {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     color: #888888;
 }
+
 
 
 .item_btn

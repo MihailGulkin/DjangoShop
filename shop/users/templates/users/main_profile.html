@@ -8,18 +8,26 @@
     <div class="profile_container_info">
         <h1>Активность в соообществе</h1>
         <div class="profile_container_info_msg">
-            <h2>Мои отзывы({{ user_comment.count }})</h2>
+            <h2 id="profile_h2_container">Мои отзывы({{ user_comment.count }})</h2>
             {% for comment in user_comment %}
-                <ul>
-                    <li>{{ comment.date }}</li>
-                    <li><a href="{% url 'shop_item_comment_page' pk=comment.product.pk %}#{{ comment.date }}{{ comment.author.user.username }}">{{ comment.product }}</a></li>
-                    <li></li>
-                    <li></li>
+
+                <ul class="profile_ul_container_comment">
+                    <li class="profile_li_container_comment"><p>{{ comment.date }}</p></li>
+                    <li class="profile_li_container_comment">
+                        <a class="profile_comment_model" href="{% url 'shop_item_comment_page' pk=comment.product.pk %}#{{ comment.date }}{{ comment.author.user.username }}">{{ comment.product }}</a>
+                    </li>
+                    <li class="profile_li_container_comment">
+                        <a class="profile_comment_model" href="{% url 'shop_item_edit_comment_page' pk=comment.product.pk pk_alt=comment.pk%}">Редактировать</a>
+                    </li>
+                    <li class="profile_li_container_comment">
+                        <form id="comment_form" method="post">
+                            {% csrf_token %}
+                            <button class="comment_profile_button" name="key" value="{{ comment.pk }}">Удалить</button>
+                        </form>
+                    </li>
                 </ul>
             {% endfor %}
-{#            <a>href="{% url 'shop_item_comment_page' pk=user_comment.0.product.pk %}#{{ user_comment.0.date }}{{ user_comment.0.author.user.username }}">Перейти на комментарий</a>#}
-
         </div>
-
     </div>
+    <script src="{% static 'js/adaptive_by_count_comment.js' %}"></script>
 {% endblock profile %}

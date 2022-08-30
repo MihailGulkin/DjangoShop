@@ -20,6 +20,7 @@
             <div class="item_btn_block">
                 <div class="item_btn_header item_btn_cont">
                     {% if product.availability %}
+                        <h4>{{ product.price }} ₽</h4>
                         <h4 class='js_locker'>В наличии</h4>
                     {% else %}
                         <h4 class="js_locker">Ожидается</h4>
@@ -34,7 +35,7 @@
                     </form>
                 {% else %}
                     <div class="item_btn_container item_btn_cont">
-                        <a class="item_btn" href="{% url 'profile_page' %}">
+                        <a class="item_btn" href="{% url 'bucket_page' %}">
                             Перейти в корзину
                         </a>
                     </div>

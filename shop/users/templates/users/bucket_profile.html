@@ -1,0 +1,50 @@
+{% extends 'users/base_profile.html' %}
+{% load widget_tweaks %}
+{% load mathfilters %}
+{% load web_zip %}
+{% block title %}
+    <title>Profile</title>
+{% endblock title %}
+{% load static %}
+{% block profile %}
+    <div class="profile_container_info">
+        <h1>Возможные покупки</h1>
+        <div class="profile_container_info_msg">
+            <h2>Мои товары</h2>
+            {% for bucket, bucket_form in buckets|zip:buckets_form %}
+                <ul class="profile_bucket_ul">
+                    <li class="profile_li_container_comment">
+                        <a href="{% url 'shop_item_page' pk=bucket.product.pk %}">{{ bucket.product.name }}</a>
+                    </li>
+                    <li class="profile_li_container_comment">
+                        <form class="bucket_number_form" method="post" id="form{{ bucket.pk }}">
+                            {% csrf_token %}
+                            <button name="minus" value="{{ bucket.pk }}" class="bucket_button">-</button>
+                            <input name='key {{ bucket.product }}' id="{{ bucket.pk }}" class="bucket_profile_input"
+                                   onkeypress="return event.charCode>=48 && event.charCode<=57"
+                                   value="{{ bucket.quantity }}">
+                            <button name="plus" value="{{ bucket.pk }}" class="bucket_button">+</button>
+                        </form>
+                    </li>
+                    <li class="profile_li_container_comment">
+                        <p>
+                            {{ bucket.product.price | mul:bucket.quantity }}₽
+                        </p>
+                    </li>
+                    <li class="profile_li_container_comment">
+                        <form id="bucket_delete_form" method="post">
+                            {% csrf_token %}
+                            <button class="comment_profile_button" name="key" value="{{ bucket.pk }}">Удалить</button>
+                        </form>
+                    </li>
+                </ul>
+            {% endfor %}
+            {% if buckets %}
+                <div class="profile_bucket_div">
+                    <button class="comment_profile_button">Сделать заказ</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{% static 'js/input_validator_form_submit.js' %}"></script>
+{% endblock profile %}

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/main_profile.css'%}">
     <link rel="stylesheet" href="{% static 'css/personal_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile_bucket.css' %}">
 {% endblock style %}
 {% block content %}
     <section class="profile_section">
@@ -43,6 +44,9 @@
                         <li class="profile_li_container">
                             <a id="profile_a_personal" href="{% url 'personal_page' %}">Личная
                                 информация</a>
+                        </li>
+                        <li class="profile_li_container">
+                            <a id="profile_a_bucket" href="{% url 'bucket_page' %}">Корзина</a>
                         </li>
                     </ul>
                 </div>

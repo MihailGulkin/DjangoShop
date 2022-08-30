@@ -1,0 +1,51 @@
+.profile_bucket_ul
+{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.bucket_number_form
+{
+    display: flex;
+
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button
+{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bucket_profile_input
+{
+    width: 50px;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid #eaf0f5;
+    border-bottom: 1px solid #eaf0f5;
+    text-align: center;
+}
+
+.bucket_button
+{
+    background: #eaf0f5;
+    border: none;
+    margin: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.bucket_button:hover
+{
+    background: #016fff;
+    transition: .7s;
+}
+.profile_bucket_div
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

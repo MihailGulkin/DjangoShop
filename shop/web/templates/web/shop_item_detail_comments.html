@@ -10,7 +10,7 @@
             {% for comment in comment_form %}
                 <div class="comments_container">
                     <div class="comments_avatar">
-                        <img src="{{ comment.author.img.url }}">
+                        <img src="{{ comment.author.img.url }}" alt>
                     </div>
                     <div>
                         <div id="{{comment.date}}{{ comment.author.user.username }}" class="comments_author">

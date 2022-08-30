@@ -131,3 +131,27 @@ class ShopItemSendCommentView(View):
             return redirect('shop_item_comment_page', pk=pk)
         return render(request, self.template,
                       {'product_review': comment_form})
+
+
+class ShopCommentEditPage(View):
+    template = 'web/shop_item_comment_edit.html'
+
+    def get(self, request, pk, pk_alt):
+        comment_model = CommentReviewAboutProduct.objects.filter(
+            product=Product.objects.get(pk=pk), pk=pk_alt).first()
+        comment_form = CommentReviewForm(instance=comment_model)
+        return render(request, self.template,
+                      {'product_review': comment_form})
+
+    def post(self, request, pk, pk_alt):
+        comment_form = CommentReviewForm(request.POST)
+        comment_edit = CommentReviewAboutProduct.objects.filter(
+            product=Product.objects.get(pk=pk), pk=pk_alt).first()
+        if comment_form.is_valid():
+            comment_edit.product_cons = comment_form.cleaned_data.get('product_cons')
+            comment_edit.product_pros = comment_form.cleaned_data.get('product_pros')
+            comment_edit.product_comment = comment_form.cleaned_data.get('product_comment')
+            comment_edit.save()
+            return redirect('profile_page')
+        return render(request, self.template,
+                      {'product_review': comment_form})

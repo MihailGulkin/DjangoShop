@@ -51,7 +51,7 @@ class CommentReviewAboutProduct(models.Model):
     date = models.DateTimeField(default=timezone.now)
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['product', '-date']
 
     def __str__(self):
         return f'{self.author.user.username} - {self.product.name}'

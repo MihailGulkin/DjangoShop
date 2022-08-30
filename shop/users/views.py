@@ -8,7 +8,8 @@ from django.contrib.auth import logout, login
 from .forms import ProfileForm, CreateUserForm, LoginForm, ImageForm, \
     ProfileChangeForm, UsernameChangeForm
 from .models import Profile, User
-from web.models import CommentReviewAboutProduct
+from web.models import CommentReviewAboutProduct, Bucket, Product
+from web.forms import BucketForm
 
 
 class RegisterPageView(View):
@@ -68,6 +69,8 @@ class ProfilePageView(LoginRequiredMixin, View):
                            author=profile)})
 
     def post(self, request):
+        CommentReviewAboutProduct.objects.filter(
+            pk=request.POST.get('key')).first().delete()
         img_form = ImageForm(request.POST, request.FILES)
         profile = Profile.objects.get(user=request.user)
         if img_form.is_valid():
@@ -117,3 +120,68 @@ class ProfilePersonalPageView(LoginRequiredMixin, View):
                        'form_profile': form_profile,
                        'form_username': form_username},
                       )
+
+
+class ProfileBucketPageView(View):
+    template = 'users/bucket_profile.html'
+
+    def get(self, request):
+        profile = Profile.objects.get(user=request.user)
+        buckets = Bucket.objects.filter(
+            owner=Profile.objects.get(user=request.user))
+        buckets_form = [BucketForm(instance=bucket) for bucket in buckets]
+        return render(request, self.template,
+                      {'profile_model': profile,
+                       'img': ImageForm,
+                       'buckets': buckets,
+                       'buckets_form': buckets_form
+                       })
+
+    def post(self, request):
+        self.request_checker(request)
+        img_form = ImageForm(request.POST, request.FILES)
+        profile = Profile.objects.get(user=request.user)
+        # if bucket_form.is_valid():
+        #     # Bucket.objects.get(owner=profile, product=)
+        # pass
+        if img_form.is_valid():
+            img_form = img_form.save(commit=False)
+            if img_form.img != 'no_image_django_shop_py.jpg':
+                profile.img = img_form.img
+                profile.save(update_fields=['img'])
+            return redirect('bucket_page')
+        return render(request, self.template,
+                      {'profile_model': profile,
+                       'img': ImageForm,
+                       'errors': img_form},
+                      )
+
+    def request_checker(self, request):
+        logging.error(request.POST)
+        if x := request.POST.get('key'):
+            Bucket.objects.get(pk=x).delete()
+        elif x := request.POST.get('plus'):
+            bucket = Bucket.objects.get(pk=x)
+            if bucket.quantity == 300:
+                return
+            bucket.quantity += 1
+            bucket.save()
+        elif x := request.POST.get('minus'):
+            bucket = Bucket.objects.get(pk=x)
+            if bucket.quantity == 1:
+                bucket.delete()
+                return
+            bucket.quantity -= 1
+            bucket.save()
+        else:
+            for ele in request.POST:
+                if 'key' in ele:
+                    quantity = int(request.POST[ele])
+                    product = ele.replace('key ', '')
+                    if 0 <= quantity <= 300:
+                        bucket = Bucket.objects.get(
+                            product=Product.objects.get(name=product),
+                            owner=Profile.objects.get(user=request.user))
+                        bucket.quantity = quantity
+                        bucket.save()
+                        return
