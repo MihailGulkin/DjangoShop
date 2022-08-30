@@ -69,8 +69,9 @@ class ProfilePageView(LoginRequiredMixin, View):
                            author=profile)})
 
     def post(self, request):
-        CommentReviewAboutProduct.objects.filter(
-            pk=request.POST.get('key')).first().delete()
+        if 'key' in request.POST:
+            CommentReviewAboutProduct.objects.filter(
+                pk=request.POST.get('key')).first().delete()
         img_form = ImageForm(request.POST, request.FILES)
         profile = Profile.objects.get(user=request.user)
         if img_form.is_valid():
