@@ -42,6 +42,7 @@ input[type="number"]::-webkit-inner-spin-button
 {
     background: #016fff;
     transition: .7s;
+    cursor: pointer;
 }
 .profile_bucket_div
 {
