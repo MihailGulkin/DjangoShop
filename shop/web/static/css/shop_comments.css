@@ -28,6 +28,11 @@
     margin-right: 27px;
     box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
 }
+.comments_container_content
+{
+    width:100%;
+    word-wrap: break-word;
+}
 .comments_author
 {
     padding-top: 100px;

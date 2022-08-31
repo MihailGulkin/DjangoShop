@@ -67,8 +67,9 @@ class ProfilePageView(LoginRequiredMixin, View):
 
     def post(self, request):
         if 'key' in request.POST:
-            CommentReviewAboutProduct.objects.filter(
-                pk=request.POST.get('key')).first().delete()
+            if x := CommentReviewAboutProduct.objects.filter(
+                    pk=request.POST.get('key')):
+                x.first().delete()
         img_form = ImageForm(request.POST, request.FILES)
         profile = Profile.objects.get(user=request.user)
         if img_form.is_valid():
@@ -177,29 +178,35 @@ class ProfileBucketPageView(View):
 
     def request_checker(self, request):
         if x := request.POST.get('key'):
-            Bucket.objects.get(pk=x).delete()
+            if Bucket.objects.filter(pk=x):
+                Bucket.objects.get(pk=x).delete()
         elif x := request.POST.get('plus'):
-            bucket = Bucket.objects.get(pk=x)
-            if bucket.quantity == 300:
-                return
-            bucket.quantity += 1
-            bucket.save()
+            if Bucket.objects.filter(pk=x):
+                bucket = Bucket.objects.get(pk=x)
+                if bucket.quantity == 300:
+                    return
+                bucket.quantity += 1
+                bucket.save()
         elif x := request.POST.get('minus'):
-            bucket = Bucket.objects.get(pk=x)
-            if bucket.quantity == 1:
-                bucket.delete()
-                return
-            bucket.quantity -= 1
-            bucket.save()
+            if Bucket.objects.filter(pk=x):
+                bucket = Bucket.objects.get(pk=x)
+                if bucket.quantity == 1:
+                    bucket.delete()
+                    return
+                bucket.quantity -= 1
+                bucket.save()
         else:
             for ele in request.POST:
                 if 'key' in ele:
                     quantity = int(request.POST[ele])
                     product = ele.replace('key ', '')
                     if 0 <= quantity <= 300:
-                        bucket = Bucket.objects.get(
-                            product=Product.objects.get(name=product),
-                            owner=Profile.objects.get(user=request.user))
-                        bucket.quantity = quantity
-                        bucket.save()
-                        return
+                        if Bucket.objects.filter(
+                                product=Product.objects.get(name=product),
+                                owner=Profile.objects.get(user=request.user)):
+                            bucket = Bucket.objects.get(
+                                product=Product.objects.get(name=product),
+                                owner=Profile.objects.get(user=request.user))
+                            bucket.quantity = quantity
+                            bucket.save()
+                            return
