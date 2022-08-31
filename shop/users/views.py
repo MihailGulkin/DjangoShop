@@ -198,7 +198,11 @@ class ProfileBucketPageView(View):
         else:
             for ele in request.POST:
                 if 'key' in ele:
-                    quantity = int(request.POST[ele])
+                    try:
+                        # Если вдруг в Input вставить текст
+                        quantity = int(request.POST[ele])
+                    except ValueError:
+                        return
                     product = ele.replace('key ', '')
                     if 0 <= quantity <= 300:
                         if Bucket.objects.filter(
