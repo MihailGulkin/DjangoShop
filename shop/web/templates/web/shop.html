@@ -42,28 +42,28 @@
                         {% if product.group == "mobile" %}
                             <!-- Телефон -->
                             <div class="mobile shop_product_container">
-                                <img src="{{ product.img.url }}" alt="">
+                                <img class="shop_product_image" src="{{ product.img.url }}" alt="">
                                 <a target="_blank" href="{% url 'shop_item_page' pk=product.pk %}">{{ product.name }}</a>
                                 <p>Цена: {{ product.price }} ₽</p>
                             </div>
                         {% elif product.group == "pc" %}
                             <div class="pc shop_product_container">
                                 <!-- Компьютеры -->
-                                <img src="{{ product.img.url }}" alt="">
+                                <img class="shop_product_image" src="{{ product.img.url }}" alt="">
                                 <a target="_blank" href="{% url 'shop_item_page' pk=product.pk %}">{{ product.name }}</a>
                                 <p>Цена: {{ product.price }} ₽</p>
                             </div>
                         {% elif product.group == "notebook" %}
                             <div class="notebook shop_product_container">
                                 <!-- Ноутбуки -->
-                                <img src="{{ product.img.url }}" alt="">
+                                <img class="shop_product_image" src="{{ product.img.url }}" alt="">
                                 <a target="_blank" href="{% url 'shop_item_page' pk=product.pk %}">{{ product.name }}</a>
                                 <p>Цена: {{ product.price }} ₽</p>
                             </div>
                         {% else %}
                             <div class="accessories shop_product_container">
                                 <!-- Аксессуары -->
-                                <img src="{{ product.img.url }}" alt="">
+                                <img class="shop_product_image" src="{{ product.img.url }}" alt="">
                                 <a target="_blank" href="{% url 'shop_item_page' pk=product.pk %}">{{ product.name }}</a>
                                 <p>Цена: {{ product.price }} ₽</p>
                             </div>

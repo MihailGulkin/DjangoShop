@@ -74,7 +74,8 @@ class ProfilePageView(LoginRequiredMixin, View):
         if img_form.is_valid():
             img_form = img_form.save(commit=False)
             if img_form.img != 'no_image_django_shop_py.jpg':
-                profile.img.delete()
+                if profile.img != 'no_image_django_shop_py.jpg':
+                    profile.img.delete()
                 profile.img = img_form.img
                 profile.save(update_fields=['img'])
             return redirect('profile_page')
@@ -109,7 +110,8 @@ class ProfilePersonalPageView(LoginRequiredMixin, View):
             if img_form.is_valid():
                 img_form = img_form.save(commit=False)
                 if img_form.img != 'no_image_django_shop_py.jpg':
-                    profile.img.delete()
+                    if profile.img != 'no_image_django_shop_py.jpg':
+                        profile.img.delete()
                     profile.img = img_form.img
                     profile.save(update_fields=['img'])
                 return redirect('personal_page')
@@ -117,7 +119,7 @@ class ProfilePersonalPageView(LoginRequiredMixin, View):
                           {'profile_model': profile,
                            'img': ImageForm,
                            'errors': img_form,
-                           'form_username':form_username,
+                           'form_username': form_username,
                            'form_profile': form_profile},
                           )
 
@@ -162,7 +164,8 @@ class ProfileBucketPageView(View):
         if img_form.is_valid():
             img_form = img_form.save(commit=False)
             if img_form.img != 'no_image_django_shop_py.jpg':
-                profile.img.delete()
+                if profile.img != 'no_image_django_shop_py.jpg':
+                    profile.img.delete()
                 profile.img = img_form.img
                 profile.save(update_fields=['img'])
             return redirect('bucket_page')
