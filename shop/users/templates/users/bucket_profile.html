@@ -2,6 +2,7 @@
 {% load widget_tweaks %}
 {% load mathfilters %}
 {% load web_zip %}
+{% load bucket_all_sum %}
 {% block title %}
     <title>Profile</title>
 {% endblock title %}
@@ -41,6 +42,7 @@
             {% endfor %}
             {% if buckets %}
                 <div class="profile_bucket_div">
+                    <h2>Итого к оплате: {{ buckets|bucket_sum }}</h2>
                     <button class="comment_profile_button">Сделать заказ</button>
                 </div>
             {% endif %}
