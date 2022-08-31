@@ -17,7 +17,11 @@ input[type="number"]::-webkit-inner-spin-button
     -webkit-appearance: none;
     margin: 0;
 }
-
+.profile_a_bucket:hover
+{
+    color: lightgreen;
+    transition: .7s;
+}
 .bucket_profile_input
 {
     width: 50px;
@@ -36,11 +40,12 @@ input[type="number"]::-webkit-inner-spin-button
     margin: 0;
     width: 32px;
     height: 32px;
+    font-size: 16px;
 }
 
 .bucket_button:hover
 {
-    background: #016fff;
+    background: #7cc476;
     transition: .7s;
     cursor: pointer;
 }

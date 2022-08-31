@@ -9,7 +9,6 @@
 .item_container
 {
     height: 100%;
-    max-width: 1920px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;

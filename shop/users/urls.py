@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import re_path
 from .views import RegisterPageView, LoginPageView, ProfilePageView, \
     ProfilePersonalPageView, ProfileBucketPageView
 from django.contrib.auth.views import LogoutView

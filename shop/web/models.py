@@ -1,9 +1,7 @@
-import datetime
-
 from django.db import models
 from users.models import Profile
 from django.utils import timezone
-from django.core.validators import MaxLengthValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator
 
 
 class Product(models.Model):

@@ -1,7 +1,4 @@
-import logging
-
 from django.shortcuts import render, redirect
-from django.shortcuts import HttpResponse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout, login
@@ -77,6 +74,7 @@ class ProfilePageView(LoginRequiredMixin, View):
         if img_form.is_valid():
             img_form = img_form.save(commit=False)
             if img_form.img != 'no_image_django_shop_py.jpg':
+                profile.img.delete()
                 profile.img = img_form.img
                 profile.save(update_fields=['img'])
             return redirect('profile_page')
@@ -104,6 +102,25 @@ class ProfilePersonalPageView(LoginRequiredMixin, View):
 
     def post(self, request):
         profile = Profile.objects.get(user=request.user)
+        if request.FILES:
+            form_profile = ProfileChangeForm(instance=profile)
+            form_username = UsernameChangeForm(instance=profile.user)
+            img_form = ImageForm(request.POST, request.FILES)
+            if img_form.is_valid():
+                img_form = img_form.save(commit=False)
+                if img_form.img != 'no_image_django_shop_py.jpg':
+                    profile.img.delete()
+                    profile.img = img_form.img
+                    profile.save(update_fields=['img'])
+                return redirect('personal_page')
+            return render(request, self.template,
+                          {'profile_model': profile,
+                           'img': ImageForm,
+                           'errors': img_form,
+                           'form_username':form_username,
+                           'form_profile': form_profile},
+                          )
+
         user = User.objects.get(username=request.user)
         form_profile = ProfileChangeForm(request.POST, request=request)
         form_username = UsernameChangeForm(request.POST, request=request)
@@ -142,12 +159,10 @@ class ProfileBucketPageView(View):
         self.request_checker(request)
         img_form = ImageForm(request.POST, request.FILES)
         profile = Profile.objects.get(user=request.user)
-        # if bucket_form.is_valid():
-        #     # Bucket.objects.get(owner=profile, product=)
-        # pass
         if img_form.is_valid():
             img_form = img_form.save(commit=False)
             if img_form.img != 'no_image_django_shop_py.jpg':
+                profile.img.delete()
                 profile.img = img_form.img
                 profile.save(update_fields=['img'])
             return redirect('bucket_page')
@@ -158,7 +173,6 @@ class ProfileBucketPageView(View):
                       )
 
     def request_checker(self, request):
-        logging.error(request.POST)
         if x := request.POST.get('key'):
             Bucket.objects.get(pk=x).delete()
         elif x := request.POST.get('plus'):

@@ -1,10 +1,8 @@
-import logging
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Product, Bucket, CommentReviewAboutProduct
-from .forms import BucketForm, CommentReviewForm
+from .forms import CommentReviewForm
 from users.models import Profile
 
 
