@@ -17,6 +17,10 @@ input[type="number"]::-webkit-inner-spin-button
     -webkit-appearance: none;
     margin: 0;
 }
+.profile_a_bucket
+{
+    text-align: center;
+}
 .profile_a_bucket:hover
 {
     color: lightgreen;
