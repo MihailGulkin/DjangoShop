@@ -118,9 +118,12 @@ USE_THOUSAND_SEPARATOR = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'shop/static/media')
 MEDIA_URL = 'media/'
+
 LOGOUT_REDIRECT_URL = 'main_page'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
