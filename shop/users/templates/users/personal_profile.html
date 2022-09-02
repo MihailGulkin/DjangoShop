@@ -13,11 +13,13 @@
                 <ul class="profile_ul_container_personal_fields">
                     <li class="profile_li_container_personal_field">
                         <h4>Имя</h4>
-                        {{ form_profile.first_name}}
+                        {{ form_profile.first_name }}
+                        <p>{{ form_profile.errors.first_name }}</p>
                     </li>
                     <li class="profile_li_container_personal_field">
                         <h4>Фамилия</h4>
-                        {{ form_profile.last_name}}
+                        {{ form_profile.last_name }}
+                        <p>{{ form_profile.errors.last_name }}</p>
                     </li>
                     <li class="profile_li_container_personal_field">
                         <h4>E-mail</h4>
